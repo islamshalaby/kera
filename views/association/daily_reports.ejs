@@ -1,0 +1,158 @@
+
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body class="antialiased">
+    <div class="wrapper">
+        
+        <div class="wrapper">
+          <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+      <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+          <div class="row align-items-center">
+            <div class="col">
+              <!-- Page pre-title -->
+              <h2 class="page-title">
+                Show Daily Reports
+              </h2>
+            </div>
+            <!-- Page title actions -->
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                
+                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-deck row-cards">
+            <div class="col-12">
+                <div class="card">
+                  <div class="table-responsive">
+                      <table class="table table-vcenter card-table">
+                          <thead>
+                              <tr>
+                                <th>teacher</th>
+                                <th>students</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <%data.forEach((row) => {%>
+                              <tr>
+                                <td>
+                                  <div class="d-flex py-1 align-items-center">
+                                    <span class="avatar me-2" style="background-image: url('<%= row.teacher.profileImage%>')"></span>
+                                    <div class="flex-fill">
+                                      <div class="font-weight-medium"><%= row.teacher.username%></div>
+                                      <div class="text-muted"><a href="#" class="text-reset"><%= row.teacher.specialization%></a></div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="col-auto ms-auto">
+                                    <div class="avatar-list avatar-list-stacked">
+                                      <%row.students.forEach((std) => {%>
+                                      <span class="avatar avatar-sm avatar-rounded" style="background-image: url('<%= (std.profileImage) ? std.profileImage : "" %>')"></span>
+                                      <%})%>
+                                    </div>
+                                  </div>
+                                    
+                                </td>
+                                <td><%= moment((row.date / 100) * 100).format("DD MMM YYYY hh:mm a")%></td>
+                                <td>
+                                  <% if(row.status == 1) {%>
+                                    Created
+                                  <% }else if(row.status == 2) {%>
+                                    In Progress
+                                  <% }else {%>
+                                    Published
+                                  <% }%>
+                                </td>  
+                                <td>
+                                      <div class="btn-list flex-nowrap">
+                                          <div class="dropdown">
+                                            <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">
+                                              Actions
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                              <a class="dropdown-item" href="/association-panel/reports/daily/details/<%= row._id%>">
+                                                  Details
+                                              </a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                  </td>
+                              </tr>
+                              <%})%>
+                          </tbody>
+                      </table>
+                  </div>
+                  <% if (pages > 1) {%>
+                    <div class="card-footer clearfix">
+                        <ul style="overflow-x: scroll;" class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link prev" href="">«</a></li>
+                        <% for(var i=1; i <= pages; i++) {%>
+                        <li class="page-item page<%=i%>"><a class="page-link" href="/association-panel/reports/daily/<%=i%>"><%= i %></a></li>
+                        <%}%>
+                        <li class="page-item"><a class="page-link next" href="">»</a></li>
+                        </ul>
+                    </div>
+                  <%}%>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <%- include('./partials/footer')%>
+    </div>
+  </div>
+      
+    </div>
+    
+    <%- include('./partials/scripts')%>
+    <script>
+      var allPages = '<%=pages%>'
+      var url = document.URL
+      var arr = url.split('/')
+      var parameter = arr [arr.length-1]
+      var pageNo = '<%=currentPage%>'
+      var shortUrl = url.substring(0,url.lastIndexOf("/"))
+      $(".page" + pageNo).addClass("active")
+    
+      if (parseInt(pageNo) > 1) {
+        var pagePrev = parseInt(pageNo)
+        --pagePrev
+        var link = shortUrl + "/" + pagePrev
+        $(".prev").attr("href", link)
+      }
+    
+      if (parseInt(pageNo) < allPages) {
+        var pageNext = parseInt(pageNo)
+        ++pageNext
+        var link = shortUrl + "/" + pageNext
+        $(".next").attr("href", link)
+      }
+    </script>
+  </body>
+</html>

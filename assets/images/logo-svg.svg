@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="102" height="127.23" viewBox="0 0 102 127.23">
+  <g id="Group_183" data-name="Group 183" transform="translate(-137 -142.77)">
+    <g id="kera" transform="translate(137 142.77)">
+      <text id="Kera-2" data-name="Kera" transform="translate(51 121.23)" fill="#0093de" font-size="39" font-family="HoboStd, Hobo Std"><tspan x="-50.915" y="0">KERA</tspan></text>
+      <g id="logo" transform="translate(-125 -156.482)">
+        <path id="Icon_awesome-font-awesome-flag" data-name="Icon awesome-font-awesome-flag" d="M11.32,9.046c0,.18-.155.258-.335.335a5.936,5.936,0,0,1-2.319.593c-1.16,0-1.7-.722-3.093-.722A7.374,7.374,0,0,0,2.661,10c-.052.026-.1.026-.155.052v1.959a.845.845,0,0,1-.85.876.869.869,0,0,1-.876-.876V2.577A1.439,1.439,0,1,1,3.1,1.443a1.369,1.369,0,0,1-.567,1.134v.8a7.671,7.671,0,0,1,2.886-.722c1.643,0,2.458.7,3.2.7a9.037,9.037,0,0,0,2.319-.7.372.372,0,0,1,.387.335V9.046Z" transform="translate(174.927 156.482)" fill="#0093de"/>
+        <path id="Icon_map-funeral-home" data-name="Icon map-funeral-home" d="M35.432,1.5.72,31.446H9.311v35.8H60.859v-35.8h8.591Z" transform="translate(140.839 168)" fill="#f379c6"/>
+        <text id="K" transform="translate(177 229.712)" fill="#fbfdff" font-size="53" font-family="HoboStd, Hobo Std"><tspan x="-17.278" y="0">K</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

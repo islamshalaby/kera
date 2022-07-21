@@ -1,0 +1,433 @@
+
+
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body class="antialiased">
+    <div class="wrapper">
+        
+        <div class="wrapper">
+          <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+      <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+          <div class="row align-items-center">
+            <div class="col">
+              <!-- Page pre-title -->
+              <h2 class="page-title">
+                Application details
+              </h2>
+            </div>
+            <!-- Page title actions -->
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                
+                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-cards">
+            
+            <div class="col-12">
+              <div class="card">
+                <ul class="nav nav-tabs" data-bs-toggle="tabs">
+                <% if(data.father && data.father.name) {%>
+                  <li class="nav-item">
+                    <a href="#father-edit" class="nav-link active" data-bs-toggle="tab">
+                        <span class="avatar" style="background-image: url('<%= data.father.profileImage %>')"></span>&nbsp; Father
+                    </a>
+                  </li>
+                <% } %>
+                <% if(data.mother && data.mother.name) {%>
+                  <li class="nav-item">
+                    <a href="#mother-edit" class="nav-link" data-bs-toggle="tab">
+                        <span class="avatar" style="background-image: url('<%= data.father.profileImage %>')"></span>&nbsp; Mother
+                    </a>
+                  </li>
+                <% } %>
+                <% if(data.related && data.related.name) {%>
+                    <li class="nav-item">
+                      <a href="#related-edit" class="nav-link" data-bs-toggle="tab">
+                          <span class="avatar" style="background-image: url('<%= data.related.profileImage %>')"></span>&nbsp; Mother
+                      </a>
+                    </li>
+                <% } %>
+                <% if(data.student && data.student.name) {%>
+                    <li class="nav-item">
+                        <a href="#student-edit" class="nav-link" data-bs-toggle="tab">
+                            <span class="avatar" style="background-image: url('<%= data.student.profileImage %>')"></span>&nbsp; Student
+                        </a>
+                    </li>
+                <% } %>
+                
+                </ul>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <% if(data.father && data.father.name) {%>
+                    <div class="tab-pane active show" id="father-edit">
+                      <form action="" method="POST" enctype="multipart/form-data">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-lg-12">
+                                      <div class="form-group mb-3 ">
+                                          <label class="form-label">Name</label>
+                                          <div>
+                                            <input type="text" name="username" class="form-control" value="<%= data.father.name %>">
+                                          </div>
+                                      </div>
+                                      <div class="form-group mb-3 ">
+                                          <label class="form-label">Job</label>
+                                          <div>
+                                            <input type="text" name="job" class="form-control" value="<%= data.father.job %>">
+                                          </div>
+                                      </div>
+                                      <div class="form-group mb-3 ">
+                                          <label class="form-label">Phone numbers</label>
+                                          <% if(data.father.phone.length > 0) {%>
+                                            <% data.father.phone.forEach((phone) => { %>
+                                          <div>
+                                            <input type="tel" name="phone" class="form-control" value="<%= phone %>">
+                                          </div>
+                                            <% }) %>
+                                          <% } %>
+                                      </div>
+                                      <div class="form-group mb-3 ">
+                                        <label class="form-label">National id Image</label>
+                                        
+                                        <div>
+                                          <img src="<%= data.idImage%>" alt="user">
+                                          <input type="file" name="profileImage" class="form-control">
+                                        </div>
+                                    </div>
+                                      <div class="form-group mb-3 ">
+                                          <label class="form-label">Profile image</label>
+                                          <div>
+                                            <input type="file" name="fatherProfileImage" class="form-control">
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                      </form>
+                    </div>
+                    <% } %>
+                    <% if(data.mother && data.mother.name) {%>
+                        <div class="tab-pane" id="mother-edit">
+                          <form action="" method="POST" enctype="multipart/form-data">
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="col-lg-12">
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Name</label>
+                                              <div>
+                                                <input type="text" name="username" class="form-control" value="<%= data.mother.name %>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Job</label>
+                                              <div>
+                                                <input type="text" name="job" class="form-control" value="<%= data.mother.job %>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Phone numbers</label>
+                                              <% if(data.mother.phone.length > 0) {%>
+                                                <% data.mother.phone.forEach((phone) => { %>
+                                              <div>
+                                                <input type="tel" name="phone" class="form-control" value="<%= phone %>">
+                                              </div>
+                                                <% }) %>
+                                              <% } %>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                            <label class="form-label">National id Image</label>
+                                            
+                                            <div>
+                                              <img src="<%= data.idImage%>" alt="user">
+                                              <input type="file" name="profileImage" class="form-control">
+                                            </div>
+                                        </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Profile image</label>
+                                              <div>
+                                                <input type="file" name="motherProfileImage" class="form-control">
+                                              </div>
+                                          </div>
+                                          
+                                      </div>
+                                      
+                                  </div>
+                              </div>
+                          </form>
+                        </div>
+                    <% } %>
+                    <% if(data.related && data.related.name) {%>
+                        <div class="tab-pane" id="related-edit">
+                          <form action="" method="POST" enctype="multipart/form-data">
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="col-lg-12">
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Name</label>
+                                              <div>
+                                                <input type="text" name="relatedName" class="form-control" value="<%= data.related.name %>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Relation</label>
+                                              <div>
+                                                <input type="text" name="relation" class="form-control" value="<%= data.related.relation %>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Phone numbers</label>
+                                              <% if(data.mother.related.length > 0) {%>
+                                                <% data.mother.related.forEach((phone) => { %>
+                                              <div>
+                                                <input type="tel" name="phone" class="form-control" value="<%= phone %>">
+                                              </div>
+                                                <% }) %>
+                                              <% } %>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                            <label class="form-label">National id Image</label>
+                                            
+                                            <div>
+                                              <img src="<%= data.idImage%>" alt="user">
+                                              <input type="file" name="profileImage" class="form-control">
+                                            </div>
+                                        </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Profile image</label>
+                                              <div>
+                                                <input type="file" name="relatedProfileImage" class="form-control">
+                                              </div>
+                                          </div>
+                                          
+                                      </div>
+                                      
+                                  </div>
+                              </div>
+                          </form>
+                        </div>
+                    <% } %>
+                    <% if(data.student && data.student.name) {%>
+                        <div class="tab-pane" id="student-edit">
+                          <form action="" method="POST" enctype="multipart/form-data">
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="col-lg-12">
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Name</label>
+                                              <div>
+                                                <input type="text" name="studentName" class="form-control" value="<%= data.student.name %>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Nationality</label>
+                                              <div>
+                                                <input type="text" name="nationality" class="form-control" value="<%= data.student.nationality %>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Gender</label>
+                                              <label class="form-selectgroup-item">
+                                                <input type="radio" name="gender" value="male" <%= data.student.gender == 1 ? "checked" : ""  %> class="form-selectgroup-input">
+                                                <span class="form-selectgroup-label"><!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="7" r="4"></circle><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path></svg>
+                                                  Male</span>
+                                              </label>
+                                              <label class="form-selectgroup-item">
+                                                <input type="radio" name="gender" value="female" <%= data.student.gender == 2 ? "checked" : ""  %> class="form-selectgroup-input">
+                                                <span class="form-selectgroup-label"><!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="5" r="2" /><path d="M10 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" /></svg>
+                                                  Female</span>
+                                              </label>
+                                          </div>
+                                          <div class="form-group mb-3 ">
+                                            <label class="form-label">Birth of date</label>
+                                            <div>
+                                              <input class="form-control" placeholder="Select a date" id="datepicker-icon-prepend" value="<%= data.student.birthDate %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 ">
+                                            <label class="form-label">Birth of date Image</label>
+                                            <div>
+                                              <img src="<%= data.birthImage%>" alt="user">
+                                              <input type="file" name="profileImage" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 ">
+                                          <label class="form-label">Medical history</label>
+                                          <div>
+                                              <textarea class="form-control" required data-bs-toggle="autosize" name="medicalHistory" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= data.medicalHistory %></textarea>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <div style="position: relative;" class="form-group row">
+                                              <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&libraries=places"></script> -->
+                                              <div style="position: absolute;
+                                                  top: 10px;
+                                                  left: 290px;
+                                                  z-index: 999;" class="col-md-4">
+                                                  <input id="searchTextField" placeholder="Location" class="form-control" type="text" size="50">
+                                              </div>
+                                              <div id="googleMap" style="width:100%;height:400px;"></div>
+                                              <div class="col-sm-6">
+                                                  
+                                                  <div class="col-sm-8">
+                                                      <input id="lat" class="form-control" type="hidden" name="latitude"
+                                                          value="<%= data.location.latitude%>" id="name">
+                                                  </div>
+                                              </div>
+                                              <div class="col-sm-6">
+                                              
+                                                  <div class="col-sm-8">
+                                                      <input id="long" class="form-control" type="hidden" name="longitude"
+                                                          value="<%= data.location.longitude%>" id="name">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                        </div>
+                                          <div class="form-group mb-3 ">
+                                              <label class="form-label">Profile image</label>
+                                              <div>
+                                                <input type="file" name="relatedProfileImage" class="form-control">
+                                              </div>
+                                          </div>
+                                          
+                                      </div>
+                                      
+                                  </div>
+                              </div>
+                          </form>
+                        </div>
+                    <% } %>
+                    
+                  </div>
+                </div>
+              </div>
+                
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      <%- include('./partials/footer')%>
+    </div>
+  </div>
+      
+    </div>
+    
+    <%- include('./partials/scripts')%>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMSfq40Bo2KuQvQVSQE1gmmgJdxEbDS0Y&libraries=places"></script>
+    <script>
+        /*
+        * declare map as a global variable
+        */
+        var map;
+        var previousMarker;
+        /*
+        * use google maps api built-in mechanism to attach dom events
+        */
+        google.maps.event.addDomListener(window, "load", function () {
+            var input = document.getElementById('searchTextField');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                console.log(place.geometry.location.lat())
+                var map = new google.maps.Map(document.getElementById("googleMap"), {
+                    center: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
+                    zoom: 14,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+
+                map.addListener('click', function (e) {
+                    if (previousMarker)
+                        previousMarker.setMap(null);
+                    placeMarker(e.latLng, map);
+                });
+                return marker;
+
+
+                /*
+                * add markers to map
+                */
+                var marker0 = createMarker({
+                    position: new google.maps.LatLng(33.808678, -117.918921),
+                    map: map,
+                    icon: "http://1.bp.blogspot.com/_GZzKwf6g1o8/S6xwK6CSghI/AAAAAAAAA98/_iA3r4Ehclk/s1600/marker-green.png"
+                }, "<h1>Marker 0</h1><p>This is the home marker.</p>");
+            });
+
+            /*
+            * create map
+            */
+            var map = new google.maps.Map(document.getElementById("googleMap"), {
+                center: new google.maps.LatLng(26.8349009, 35.3730127),
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+
+
+            map.addListener('click', function (e) {
+                if (previousMarker)
+                    previousMarker.setMap(null);
+                placeMarker(e.latLng, map);
+            });
+            return marker;
+
+
+            /*
+            * add markers to map
+            */
+            var marker0 = createMarker({
+                position: new google.maps.LatLng(33.808678, -117.918921),
+                map: map,
+                icon: "http://1.bp.blogspot.com/_GZzKwf6g1o8/S6xwK6CSghI/AAAAAAAAA98/_iA3r4Ehclk/s1600/marker-green.png"
+            }, "<h1>Marker 0</h1><p>This is the home marker.</p>");
+
+        });
+
+
+
+        function placeMarker(position, map) {
+            previousMarker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+            var lat = document.getElementById('lat').value = position.lat(),
+                long = document.getElementById('long').value = position.lng()
+            console.log(position.lat())
+            // map.setPosition(position);
+        }
+
+
+    </script>
+
+  </body>
+</html>

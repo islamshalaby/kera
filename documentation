@@ -1,0 +1,59 @@
+response status
+---------------
+200 => success
+401 => invalid user
+403 => required fields
+450 => not permitted
+408 => user is blocked
+406 => email | phone is already exist
+-------------------------------------
+=====================================
+
+notification
+------------
+300 => trip started
+{
+    notificationNumber,
+    tripId,
+    driverId,
+    driverPhoneNumber,
+    lattitude,
+    longitude,
+    address
+}
+----------------------
+310 => driver approached user
+{
+    notificationNumber,
+    distance
+}
+-----------------------------
+=============================
+
+socket
+------
+socket name : authentication
+----------------------------
+=> send
+{
+    token
+}
+----------------------------
+socket name : updateLocation
+----------------------------
+=> send
+{
+    tripId,
+    longitude,
+    latitude,
+    location
+}
+
+--------------------------
+socket name : locationRoom
+--------------------------
+=> listen
+{
+    longitude,
+    latitude
+}

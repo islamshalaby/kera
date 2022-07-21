@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body>
+        <!--end logo-->
+        <%- include("./partials/navBar")%>
+    <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Terlive</a></li>
+                                    <li class="breadcrumb-item active">Lines</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Lines</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>driver</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%data.forEach((row) => {%>
+                                        <tr>
+                                            <td><%= row.name%></td>
+                                            <td><%= (row.driverId) ? row.driverId.username : ''%></td>
+                                            <td><a href="/association-panel/lines/edit/<%= row._id%>"><i class="far fa-edit"></i></a></td>
+                                        </tr>
+                                        <%})%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+                <!--end row-->
+            </div><!-- container -->
+            <footer class="footer text-center text-sm-left">&copy; 2020 Terlive <span
+                    class="text-muted d-none d-sm-inline-block float-right">Crafted with <i
+                        class="mdi mdi-heart text-danger"></i> by Mannatthemes</span></footer>
+            <!--end footer-->
+        </div><!-- end page content -->
+    </div><!-- end page-wrapper -->
+    <%- include('./partials/scripts')%>
+</body>
+
+
+</html>

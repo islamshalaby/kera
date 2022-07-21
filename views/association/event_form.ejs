@@ -1,0 +1,317 @@
+
+
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body class="antialiased">
+    <div class="wrapper">
+        
+        <div class="wrapper">
+          <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+      <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+          <div class="row align-items-center">
+            <div class="col">
+              <!-- Page pre-title -->
+              <h2 class="page-title">
+                <%= (type == 'edit') ? 'Edit' : 'Add'%> Event
+              </h2>
+            </div>
+            <!-- Page title actions -->
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                
+                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-cards">
+            
+            <div class="col-12">
+                <div class="card">
+                    <% if (requiredError && requiredError.length > 0) {%>
+                        <div class="alert icon-custom-alert alert-outline-pink b-round fade show" role="alert">
+                            <i class="mdi mdi-alert-outline alert-icon"></i>
+                            <div class="alert-text">
+                                <%= requiredError %>
+                            </div>
+
+                            <div class="alert-close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="mdi mdi-close text-danger"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Title in English</label>
+                                        <div>
+                                          <input type="text" name="title_en" required class="form-control" value="<%= (type == 'edit') ? data.title_en : ''%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Title in Arabic</label>
+                                        <div>
+                                          <input type="text" name="title_ar" required class="form-control" value="<%= (type == 'edit') ? data.title_ar : ''%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Date</label>
+                                        <div>
+                                          <input type="date" class="form-control" required name="date" value="<%= (type == 'edit') ? moment((data.date / 100) * 100).format('YYYY-MM-DD') : ''%>" id="datepicker-icon-prepend">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3 ">
+                                      <label class="form-label">Time From</label>
+                                      <div>
+                                        <input type="time" class="form-control" required value="<%= (type == 'edit') ? data.from : ''%>" name="from" id="datepicker-icon-prepend">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group mb-3 ">
+                                    <label class="form-label">Time To</label>
+                                    <div>
+                                      <input type="time" class="form-control" required value="<%= (type == 'edit') ? data.to : '' %>" name="to" id="datepicker-icon-prepend">
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group mb-3 ">
+                                    <label class="form-label">Price</label>
+                                    <div>
+                                      <input type="number" class="form-control" step="any" min="0" name="price" value="<%= (type == 'edit') ? data.price : '' %>" id="datepicker-icon-prepend">
+                                    </div>
+                                  </div>
+                                    
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Short Description in English</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="short_description_en" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.short_description_en : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Short Description in Arabic</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="short_description_ar" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.short_description_ar : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Description in English</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="description_en" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.description_en : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Description in Arabic</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="description_ar" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.description_ar : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    <div style="position: relative;" class="form-group row">
+                                        <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&libraries=places"></script> -->
+                                        <div style="position: absolute;
+                                            top: 10px;
+                                            left: 290px;
+                                            z-index: 999;" class="col-md-4">
+                                            <input id="searchTextField" placeholder="Location" class="form-control" type="text" size="50">
+                                        </div>
+                                        <div id="googleMap" style="width:100%;height:400px;"></div>
+                                        <div class="col-sm-6">
+                                            
+                                            <div class="col-sm-8">
+                                                <input id="lat" class="form-control" type="hidden" name="latitude"
+                                                    value="<%= (type == 'edit') ? data.location.latitude : ''%>" id="name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                        
+                                            <div class="col-sm-8">
+                                                <input id="long" class="form-control" type="hidden" name="longitude"
+                                                    value="<%= (type == 'edit') ? data.location.longitude : ''%>" id="name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                      <label class="form-label">Images Link</label>
+                                      <div>
+                                        <input type="text" name="link" class="form-control" value="<%= (type == 'edit') ? data.link : ''%>">
+                                      </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Main Image</label>
+                                        <div>
+                                          <input type="file" name="mainImage" multiple class="form-control">
+                                        </div>
+                                    </div>
+                                    <%if (type == 'edit') {%>
+                                      <div class="col-lg-3">
+                                          <div class="card card-sm">
+                                            <img src="<%= (data.mainImage) ? data.mainImage : ''%>" alt="user">
+                                              <!--end card-body-->
+                                          </div>
+                                          <!--end card-->
+                                      </div>
+                                      <!--end col-->
+                                    <%}%>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Images</label>
+                                        <div>
+                                          <input type="file" name="images" multiple class="form-control">
+                                        </div>
+                                    </div>
+        
+                                    
+                                    
+                                    <div class="card-footer text-end">
+                                        <div class="d-flex">
+                                            <button type="submit" class="btn btn-primary"><%= (type == 'edit' ? 'Update' : 'Add')%></button>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </form>
+                  </div>
+              </div>
+              <%if (type == 'edit') {%>
+                <% var i = 0 %>
+                <% data.images.forEach(function(image){ %>
+                <div class="col-lg-3">
+                    <div class="card card-sm">
+                      <img src="<%= (image) ? image : ''%>" alt="education">
+                        <!--end card-body-->
+                        <a class="text-danger" onclick="return confirm('Are you sure?');" href="/association-panel/events/delete/<%= i %>/<%= data._id %>">
+                          <!-- Download SVG icon from http://tabler-icons.io/i/trash -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                        </a>
+                    </div>
+                    <!--end card-->
+                </div>
+                <% i++ %>
+                <% }) %>
+              <%}%>
+          </div>
+        </div>
+      </div>
+      
+      <%- include('./partials/footer')%>
+    </div>
+  </div>
+      
+    </div>
+    
+    <%- include('./partials/scripts')%>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMSfq40Bo2KuQvQVSQE1gmmgJdxEbDS0Y&libraries=places"></script>
+<script>
+    /*
+    * declare map as a global variable
+    */
+    var map;
+    var previousMarker;
+    /*
+    * use google maps api built-in mechanism to attach dom events
+    */
+    google.maps.event.addDomListener(window, "load", function () {
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            console.log(place.geometry.location.lat())
+            var map = new google.maps.Map(document.getElementById("googleMap"), {
+                center: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            map.addListener('click', function (e) {
+                if (previousMarker)
+                    previousMarker.setMap(null);
+                placeMarker(e.latLng, map);
+            });
+            return marker;
+
+
+            /*
+            * add markers to map
+            */
+            var marker0 = createMarker({
+                position: new google.maps.LatLng(33.808678, -117.918921),
+                map: map,
+                icon: "http://1.bp.blogspot.com/_GZzKwf6g1o8/S6xwK6CSghI/AAAAAAAAA98/_iA3r4Ehclk/s1600/marker-green.png"
+            }, "<h1>Marker 0</h1><p>This is the home marker.</p>");
+        });
+
+        /*
+        * create map
+        */
+        var map = new google.maps.Map(document.getElementById("googleMap"), {
+            center: new google.maps.LatLng(26.8349009, 35.3730127),
+            zoom: 5,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+
+
+        map.addListener('click', function (e) {
+            if (previousMarker)
+                previousMarker.setMap(null);
+            placeMarker(e.latLng, map);
+        });
+        return marker;
+
+
+        /*
+        * add markers to map
+        */
+        var marker0 = createMarker({
+            position: new google.maps.LatLng(33.808678, -117.918921),
+            map: map,
+            icon: "http://1.bp.blogspot.com/_GZzKwf6g1o8/S6xwK6CSghI/AAAAAAAAA98/_iA3r4Ehclk/s1600/marker-green.png"
+        }, "<h1>Marker 0</h1><p>This is the home marker.</p>");
+
+    });
+
+
+
+    function placeMarker(position, map) {
+        previousMarker = new google.maps.Marker({
+            position: position,
+            map: map
+        });
+        var lat = document.getElementById('lat').value = position.lat(),
+            long = document.getElementById('long').value = position.lng()
+        console.log(position.lat())
+        // map.setPosition(position);
+    }
+
+
+</script>
+  </body>
+</html>

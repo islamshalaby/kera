@@ -1,0 +1,113 @@
+
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body class="antialiased">
+    <div class="wrapper">
+        
+        <div class="wrapper">
+    
+          <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+      <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+          <div class="row align-items-center">
+            <div class="col">
+              <!-- Page pre-title -->
+              <h2 class="page-title">
+                Show Applications
+              </h2>
+            </div>
+            <!-- Page title actions -->
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                
+                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-deck row-cards">
+            <div class="col-12">
+                <div class="card">
+                  <div class="table-responsive">
+                      <table class="table table-vcenter card-table">
+                          <thead>
+                              <tr>
+                                <th  style="max-width:100px">students</th>
+                                <th style="max-width:50px">Location</th>
+                                <th>Date</th>
+                                <th></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <%data.forEach((row) => {%>
+                              <tr>
+                                <td style="max-width:100px">
+                                  <div class="d-flex py-1 align-items-center">
+                                    <span class="avatar me-2" style="background-image: url('<%= row.student.profileImage%>')"></span>
+                                    <div class="flex-fill">
+                                      <div class="font-weight-medium"><%= row.student.name%></div>
+                                      <div class="text-muted"><a href="#" class="text-reset"><%= row.student.nationality%></a></div>
+                                      <div class="text-muted"><a href="#" class="text-reset"><%= row.student.gender == 1 ? 'Male' : 'Female' %></a></div>
+                                      <div class="text-muted"><a href="#" class="text-reset"><%= moment((row.student.birthDate / 100) * 100).format("DD MMM YYYY hh:mm a") %></a></div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td style="max-width:100px">
+                                  <%= row.location.address %>
+                                </td>
+                                
+                                <td><%= moment((row.date / 100) * 100).format("DD MMM YYYY hh:mm a")%></td>
+                                
+                                <td>
+                                  
+                                      <div class="btn-list flex-nowrap">
+                                          <div class="dropdown">
+                                            <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">
+                                              Actions
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                              <a class="dropdown-item" href="/association-panel/settings/applications/details/<%= row._id %>">
+                                                  Details
+                                              </a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                  </td>
+                              </tr>
+                              <%})%>
+                          </tbody>
+                      </table>
+                  </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <%- include('./partials/footer')%>
+    </div>
+  </div>
+      
+    </div>
+    
+    <%- include('./partials/scripts')%>
+  </body>
+</html>

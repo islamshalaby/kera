@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body>
+    <!-- Top Bar Start -->
+
+    <!--end logo-->
+    <%- include("./partials/navBar")%>
+
+    <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Terlive</a></li>
+                                    <li class="breadcrumb-item active"><%= (type == 'edit') ? 'Edit' : 'Add new'%>
+                                        driver</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title"><%= (type == 'edit') ? 'Edit' : 'Add new'%> driver</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <% if (requiredError && requiredError.length > 0) {%>
+                                <div class="alert icon-custom-alert alert-outline-pink b-round fade show" role="alert">
+                                    <i class="mdi mdi-alert-outline alert-icon"></i>
+                                    <div class="alert-text">
+                                        <%= requiredError %>
+                                    </div>
+
+                                    <div class="alert-close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true"><i class="mdi mdi-close text-danger"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <%}%>
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group row">
+                                                <label for="name" class="col-sm-2 col-form-label text-right">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="text" name="username" value="<%= (type == 'edit') ? data.username : ''%>"
+                                id="name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label text-right">Email</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="email" name="email"
+                                    value="<%= (type == 'edit') ? data.email : ''%>" id="email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="phone" class="col-sm-2 col-form-label text-right">Phone number</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="tel" name="phone"
+                                    value="<%= (type == 'edit') ? data.phone.value : ''%>" id="phone">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label text-right">Buses</label>
+                            <div class="col-sm-10">
+                                <select name="busId" class="form-control">
+                                    <!-- <option disabled selected>Select</option> -->
+                                    <%buses.forEach((bus) => {%>
+                                    <option
+                                        <%= (type == 'edit' && JSON.stringify(bus._id) == JSON.stringify(data.busId)) ? 'selected' : ''%>
+                                        value="<%= bus._id%>">
+                                        <%= bus.plateNumber ? bus.plateNumber : bus.leftPlateNumber + " | " + bus.rightPlateNumber%>
+                                    </option>
+                                    <%})%>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label text-right">Lines</label>
+                            <div class="col-sm-10">
+                                <select name="lineId" class="form-control">
+                                    <!-- <option>Select</option> -->
+                                    <%lines.forEach((line) => {%>
+                                    <option
+                                        <%= (type == 'edit' && JSON.stringify(line._id) == JSON.stringify(data.lineId)) ? 'selected' : ''%>
+                                        value="<%= line._id%>"><%= line.name%></option>
+                                    <%})%>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="mt-0 header-title">Profile image</h4>
+                                        <p class="text-muted mb-3">You can add a default value</p><input type="file"
+                                            id="input-file-now-custom-1" name="profileImage" class="dropify"
+                                            data-default-file="<%= (type == 'edit' && data.profileImage.imageId) ? 'https://res.cloudinary.com/df0b7ctlg/image/upload/c_scale/' + data.profileImage.imageId + '.' + data.profileImage.format : 'https://res.cloudinary.com/df0b7ctlg/image/upload/v1584784906/klskq5yjvclxbujz7gxx.png'%>">
+                                    </div>
+                                    <!--end card-body-->
+                                </div>
+                                <!--end card-->
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2">
+                                <button type="submit"
+                                    class="btn btn-gradient-primary"><%= (type == 'edit' ? 'Update' : 'Add')%></button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                </form>
+            </div>
+            <!--end card-body-->
+        </div>
+        <!--end card-->
+    </div>
+    <!--end col-->
+    <%if (type == 'edit') {%>
+    <div class="col-lg-3">
+        <div class="card client-card">
+            <div class="card-body text-center"><img src="<%= (data.profileImage.imageId) ? 'https://res.cloudinary.com/df0b7ctlg/image/upload/w_250,h_250,c_scale/' + data.profileImage.imageId + '.' + data.profileImage.format : 'https://res.cloudinary.com/df0b7ctlg/image/upload/v1584784906/klskq5yjvclxbujz7gxx.png'%>" alt="user"
+                    class="rounded-circle thumb-xl">
+                <h5 class="client-name"><%= data.username%></h5>
+                <p class="text-muted text-center mt-3"><%= data.phone.value%></p>
+            </div>
+            <!--end card-body-->
+        </div>
+        
+        <!--end card-->
+    </div>
+    <!--end col-->
+    <%}%>
+                </div>
+                <!--end row-->
+            </div><!-- container -->
+            <footer class="footer text-center text-sm-left">&copy; 2020 Terlive <span
+                    class="text-muted d-none d-sm-inline-block float-right">Crafted with <i
+                        class="mdi mdi-heart text-danger"></i> by Mannatthemes</span></footer>
+            <!--end footer-->
+        </div><!-- end page content -->
+    </div><!-- end page-wrapper -->
+    <%- include('./partials/scripts')%>
+</body>
+
+
+</html>

@@ -1,0 +1,185 @@
+
+
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body class="antialiased">
+    <div class="wrapper">
+        
+        <div class="wrapper">
+          <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+      <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+          <div class="row align-items-center">
+            <div class="col">
+              <!-- Page pre-title -->
+              <h2 class="page-title">
+                <%= (type == 'edit') ? 'Edit' : 'Add'%> Daily Question
+              </h2>
+            </div>
+            <!-- Page title actions -->
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                
+                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-cards">
+            
+            <div class="col-12">
+                <div class="card">
+                    <% if (requiredError && requiredError.length > 0) {%>
+                        <div class="alert icon-custom-alert alert-outline-pink b-round fade show" role="alert">
+                            <i class="mdi mdi-alert-outline alert-icon"></i>
+                            <div class="alert-text">
+                                <%= requiredError %>
+                            </div>
+
+                            <div class="alert-close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="mdi mdi-close text-danger"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div style="margin-bottom: 20px;" class="form-floating">
+                                        <select required class="form-select" name="questionType" id="floatingSelect" aria-label="Floating label select example">
+                                            <option disabled selected="">Select</option>
+                                            <option value="1">Input</option>
+                                            <option value="2">Select</option>
+                                            <option value="3">Radio</option>
+                                        </select>
+                                        <label for="floatingSelect">Type</label>
+                                    </div>
+                                    
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Question</label>
+                                        <div>
+                                          <input type="text" required name="question" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div style="display:none" class="form-group mb-3 options">
+                                        <label class="form-label"><h2>options</h2></label>
+                                        <div>
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">option 1</label>
+                                                <div style="margin-bottom : 20px;">
+                                                    <input type="text" name="option[]" class="form-control">
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="icon[]" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">option 2</label>
+                                                <div style="margin-bottom : 20px;">
+                                                    <input type="text" name="option[]" class="form-control">
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="icon[]" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">option 3</label>
+                                                <div style="margin-bottom : 20px;">
+                                                    <input type="text" name="option[]" class="form-control">
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="icon[]" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">option 4</label>
+                                                <div style="margin-bottom : 20px;">
+                                                    <input type="text" name="option[]" class="form-control">
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="icon[]" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Sort</label>
+                                        <div>
+                                          <input type="number" required name="sort" class="form-control">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="card-footer text-end">
+                                        <div class="d-flex">
+                                            <button type="submit" class="btn btn-primary"><%= (type == 'edit' ? 'Update' : 'Add')%></button>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </form>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      <%- include('./partials/footer')%>
+    </div>
+  </div>
+      
+    </div>
+    
+    <%- include('./partials/scripts')%>
+    <script src="/js/jquery.min.js"></script>
+    <script>
+        $("#floatingSelect").on("change", function () {
+            if ($(this).find("option:selected").val() == 2 || $(this).find("option:selected").val() == 3) {
+                $(".options").show()
+                $(".options").find('input').each(function () {
+                    $(this).prop('required', true)
+                })
+            }else {
+                $(".options").hide()
+                $(".options").find('input').each(function () {
+                    $(this).prop('required', false)
+                })
+            }
+        })
+    </script>
+
+  </body>
+</html>

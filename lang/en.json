@@ -1,0 +1,23 @@
+{
+    "driverAccepted" : "has accepted your order",
+    "orderAcceptedFromAnotherDriver" : "Order accepted from another driver",
+    "haveOrderToAccept" : "You have order to accept",
+    "newOrder" : "New order",
+    "tripStarted" : "Trip Started",
+    "userCanceledOrder" : "has canceled trip",
+    "driverCanceld" : "has canceled, we will find another driver",
+    "noDriversAcceptedOrder" : "there is no response from any driver",
+    "noDriversNearYou" : "Sorry, we can't find drivers near yoyr location",
+    "reachedSuccessfully" : "reached successfully",
+    "noPermit" : "You have no permit",
+    "approachedYou" : "The driver has approached you",
+    "orderAccepted" : "Order accepted",
+    "tripStatus" : "Trip status",
+    "tripStartSoon" : "Trip starts soon",
+    "publishedAPost" : "Published a post",
+    "newPost" : "New Post",
+    "dailyReport" : "Daily Report",
+    "DailyReportPublished" : "Daily Report has published",
+    "medicalReport" : "Medical Report",
+    "medicalReportPublished" : "Medical Report has published"
+}

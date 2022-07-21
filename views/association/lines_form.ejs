@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+
+        <!--end logo-->
+        <%- include("./partials/navBar")%>
+    <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Terlive</a></li>
+                                    <li class="breadcrumb-item active"><%= (type == 'edit') ? 'Edit' : 'Add new'%> line</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title"><%= (type == 'edit') ? 'Edit' : 'Add new'%> line</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="" method="POST">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group row">
+                                                <label for="name" class="col-sm-2 col-form-label text-right">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="text" name="name" value="<%= (type == 'edit') ? data.name : ''%>" id="name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="tripTime" class="col-sm-2 col-form-label text-right">Trip time</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="time" required min="1" step="1" name="tripTime"  value="<%= (type == 'edit') ? data.tripTime : ''%>" id="tripTime">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label text-right">Days of work</label> 
+                                                <div class="col-sm-10">
+                                                    <select name="days" class="select2 mb-3 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+                                                        <option <%= (type == "edit" && data.days.includes("6")) ? 'selected' : ''%> value="6">Saturday</option>
+                                                        <option <%= (type == "edit" && data.days.includes("0")) ? 'selected' : ''%> value="0">Sunday</option>
+                                                        <option <%= (type == "edit" && data.days.includes("1")) ? 'selected' : ''%> value="1">Monday</option>
+                                                        <option <%= (type == "edit" && data.days.includes("2")) ? 'selected' : ''%> value="2">Tuesday</option>
+                                                        <option <%= (type == "edit" && data.days.includes("3")) ? 'selected' : ''%> value="3">Wednesday</option>
+                                                        <option <%= (type == "edit" && data.days.includes("4")) ? 'selected' : ''%> value="4">Thursday</option>
+                                                        <option <%= (type == "edit" && data.days.includes("5")) ? 'selected' : ''%> value="5">Friday</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <button type="submit" class="btn btn-gradient-primary"><%= (type == 'edit' ? 'Update' : 'Add')%></button>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div><!-- container -->
+            <footer class="footer text-center text-sm-left">&copy; 2020 Terlive <span
+                    class="text-muted d-none d-sm-inline-block float-right">Crafted with <i
+                        class="mdi mdi-heart text-danger"></i> by Mannatthemes</span></footer>
+            <!--end footer-->
+        </div><!-- end page content -->
+    </div><!-- end page-wrapper -->
+    <%- include('../partials/scripts')%>
+</body>
+
+
+</html>

@@ -1,0 +1,230 @@
+
+
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body class="antialiased">
+    <div class="wrapper">
+        
+        <div class="wrapper">
+          <%- include("./partials/leftSideNav")%>
+    <div class="page-wrapper">
+      <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+          <div class="row align-items-center">
+            <div class="col">
+              <!-- Page pre-title -->
+              <h2 class="page-title">
+                <%= (type == 'edit') ? 'Edit' : 'Add'%> Meal
+              </h2>
+            </div>
+            <!-- Page title actions -->
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                
+                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="container-xl">
+          <div class="row row-cards">
+            
+            <div class="col-12">
+                <div class="card">
+                    <% if (requiredError && requiredError.length > 0) {%>
+                        <div class="alert icon-custom-alert alert-outline-pink b-round fade show" role="alert">
+                            <i class="mdi mdi-alert-outline alert-icon"></i>
+                            <div class="alert-text">
+                                <%= requiredError %>
+                            </div>
+
+                            <div class="alert-close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="mdi mdi-close text-danger"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Title in English</label>
+                                        <div>
+                                          <input type="text" name="title_en" required class="form-control" value="<%= (type == 'edit') ? data.title_en : ''%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Title in Arabic</label>
+                                        <div>
+                                          <input type="text" name="title_ar" required class="form-control" value="<%= (type == 'edit') ? data.title_ar : ''%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Meal Name in English</label>
+                                        <div>
+                                          <input type="text" name="meal_name_en" required class="form-control" value="<%= (type == 'edit') ? data.meal_name_en : ''%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Meal Name in Arabic</label>
+                                        <div>
+                                          <input type="text" name="meal_name_ar" required class="form-control" value="<%= (type == 'edit') ? data.meal_name_ar : ''%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                      <label class="form-label">Show Dates</label>
+                                      <div style="border: 1px solid #dbdada; height: 50px; overflow-y: scroll; margin-bottom: 10px;" class="showDates">
+                                        <input type="hidden" name="dates" />
+                                      </div>
+                                        <label class="form-label">Date</label>
+                                        <div>
+                                          <input type="date" class="form-control" required name="mealDate" value="<%= (type == 'edit') ? moment((data.mealDate / 100) * 100).format('YYYY-MM-DD') : ''%>" id="datepicker-icon-prepend">
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 20px;">
+                                        <label for="floatingSelect">Class</label>
+                                        <select <%=(type == 'edit') ? '' : 'multiple' %> class="form-select" required name="class">
+                                          <option selected>Select</option>
+
+                                          <% classes.forEach(function(classe){ %>
+                                            <option <%=(type == 'edit' && JSON.stringify(classe._id) == JSON.stringify(data.class)) ? 'selected' : ''  %> value="<%= classe._id %>"><%= classe.name %></option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Short Description in English</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="short_description_en" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.short_description_en : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Short Description in Arabic</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="short_description_ar" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.short_description_ar : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Description in English</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="description_en" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.description_en : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Description in Arabic</label>
+                                        <div>
+                                            <textarea class="form-control" required data-bs-toggle="autosize" name="description_ar" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 56px;"><%= (type == 'edit') ? data.description_ar : '' %></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Main Image</label>
+                                        <div>
+                                          <input type="file" name="mainImage" class="form-control">
+                                        </div>
+                                    </div>
+                                    <%if (type == 'edit') {%>
+                                      <div class="col-lg-3">
+                                          <div class="card card-sm">
+                                            <img src="<%= (data.mainImage) ? data.mainImage : ''%>" alt="user">
+                                              <!--end card-body-->
+                                          </div>
+                                          <!--end card-->
+                                      </div>
+                                      <!--end col-->
+                                    <%}%>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Tiny Image</label>
+                                        <div>
+                                          <input type="file" name="tinyImage" class="form-control">
+                                        </div>
+                                    </div>
+                                    <%if (type == 'edit') {%>
+                                      <div class="col-lg-3">
+                                          <div class="card card-sm">
+                                            <img src="<%= (data.tinyImage) ? data.tinyImage : ''%>" alt="user">
+                                              <!--end card-body-->
+                                          </div>
+                                          <!--end card-->
+                                      </div>
+                                      <!--end col-->
+                                    <%}%>
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Images</label>
+                                        <div>
+                                          <input type="file" name="images" multiple class="form-control">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="card-footer text-end">
+                                        <div class="d-flex">
+                                            <button type="submit" class="btn btn-primary"><%= (type == 'edit' ? 'Update' : 'Add')%></button>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </form>
+                  </div>
+              </div>
+              <%if (type == 'edit') {%>
+                <% var i = 0 %>
+                <% data.images.forEach(function(image){ %>
+                <div class="col-lg-3">
+                    <div class="card card-sm">
+                      <img src="<%= (image) ? image : ''%>" alt="education">
+                        <!--end card-body-->
+                        <a class="text-danger" onclick="return confirm('Are you sure?');" href="/association-panel/meals/delete/<%= i %>/<%= data._id %>">
+                          <!-- Download SVG icon from http://tabler-icons.io/i/trash -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                        </a>
+                    </div>
+                    <!--end card-->
+                </div>
+                <% i++ %>
+                <% }) %>
+              <%}%>
+          </div>
+        </div>
+      </div>
+      
+      <%- include('./partials/footer')%>
+    </div>
+  </div>
+      
+    </div>
+    
+    <%- include('./partials/scripts')%>
+    <script>
+      $("#datepicker-icon-prepend").on("change", function() {
+        var dateSelected = $(this).val(),
+            inputVal = $(".showDates").find('input').val() + ',' + dateSelected
+        $(".showDates").find('input').attr('value', inputVal)
+        $(".showDates").append(`<i>${dateSelected}</i><br/>`)
+      })
+    </script>
+
+  </body>
+</html>

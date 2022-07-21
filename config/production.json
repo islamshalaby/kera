@@ -1,0 +1,21 @@
+{
+  "Customer": {
+    "dbConfig": {
+      "username": "kera",
+      "password": "0185865167Isso",
+      "name": "kera-test",
+      "type" : "mongodb+srv",
+      "url" : "mongodb+srv://kera:0185865167Isso@kera.lai3r.mongodb.net/kera-test?retryWrites=true&w=majority"
+    },
+    "email" : {
+      "user" : "keraapp5@gmail.com",
+      "password" : "cxvhvqhjkgqmllbe"
+    },
+    "usersLoginException" : ["01018808084"],
+    "teachersLoginException" : ["01018808085"],
+    "credit": {
+      "initialLimit": 100,
+      "initialDays": 1
+    }
+  }
+}

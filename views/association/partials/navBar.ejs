@@ -1,0 +1,41 @@
+<div class="topbar">
+    <!-- LOGO -->
+    <div class="topbar-left"><a href="/association-bar" class="logo"><span><img src="/images/logo-sm.png"
+                    alt="logo-small" class="logo-sm"> </span><span> </span></a></div>
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <ul class="list-unstyled topbar-nav float-right mb-0">
+            <li class="hidden-sm"><a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
+                    href="javascript: void(0);" role="button" aria-haspopup="false" aria-expanded="false">English <img
+                        src="/images/flags/us_flag.jpg" class="ml-2" height="16" alt=""> <i
+                        class="mdi mdi-chevron-down"></i></a>
+                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><span>Arabic
+                        </span><img src="/images/flags/egypt_flag.jpg" alt="" class="ml-2 float-right" height="14"></a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown"
+                    href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="<%= (profile.image.imageId) ? 'https://res.cloudinary.com/df0b7ctlg/image/upload/c_scale/w_150,h_150/' + profile.image.imageId + '.' + profile.image.format : 'https://res.cloudinary.com/df0b7ctlg/image/upload/v1584787996/vwktpqlfaezdhoazhzdj.png'%>"
+                        alt="profile-user" class="rounded-circle"> <span class="ml-1 nav-user-name hidden-sm"><%= profile.username%> <i
+                            class="mdi mdi-chevron-down"></i></span></a>
+                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i
+                            class="ti-user text-muted mr-2"></i> Profile</a> <a class="dropdown-item" href="#"><i
+                            class="ti-settings text-muted mr-2"></i> Settings</a>
+                    <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="#"><i
+                            class="ti-power-off text-muted mr-2"></i> Logout</a>
+                </div>
+            </li>
+        </ul>
+        <!--end topbar-nav-->
+        <ul class="list-unstyled topbar-nav mb-0">
+            <li><button class="nav-link button-menu-mobile waves-effect waves-light"><i
+                        class="ti-menu nav-icon"></i></button></li>
+            <li class="hide-phone app-search">
+                <form role="search" class=""><input type="text" id="AllCompo" placeholder="Search..."
+                        class="form-control"> <a href="#"><i class="fas fa-search"></i></a></form>
+            </li>
+        </ul>
+    </nav><!-- end navbar-->
+</div>
